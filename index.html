@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cronograma AWS SAP-C03 | GFT Technologies</title>
   <style>
+    /* ── Tokens ──────────────────────────────────────── */
     :root {
       --gft-navy:   #0D1B2A;
       --gft-blue:   #1A3550;
       --gft-mid:    #3B6186;
       --gft-steel:  #5B8DB8;
-      --gft-light:  #A8C8E8;
       --gft-pale:   #D6E8F5;
       --aws-orange: #FF9900;
       --aws-dark:   #232F3E;
@@ -18,10 +18,12 @@
       --gray-50:    #F8FAFC;
       --gray-100:   #EEF2F7;
       --gray-200:   #D1DCE8;
+      --gray-400:   #94A3B8;
       --gray-500:   #6B7C93;
       --gray-700:   #374151;
       --done:       #22C55E;
       --done-bg:    #DCFCE7;
+      --radius:     10px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,6 +32,7 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--gray-50);
       color: var(--gray-700);
+      line-height: 1.5;
     }
 
     /* ── Header ──────────────────────────────────────── */
@@ -71,7 +74,7 @@
     }
     header h1 span { color: var(--aws-orange); }
     .header-meta {
-      display: flex; gap: 1.5rem; margin-top: .75rem;
+      display: flex; gap: 1rem; margin-top: .75rem;
       flex-wrap: wrap; position: relative; z-index: 1;
     }
     .meta-chip {
@@ -90,77 +93,246 @@
       padding: .75rem 2rem;
       display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;
     }
+    .legend-label { font-size: .72rem; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: .06em; }
     .legend-item { display: flex; align-items: center; gap: .4rem; font-size: .78rem; font-weight: 500; }
-    .legend-badge { width: 12px; height: 12px; border-radius: 3px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-    /* ── Main ────────────────────────────────────────── */
+    /* ── Main container ──────────────────────────────── */
     main { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
 
+    /* ── Shared card base ────────────────────────────── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
     /* ── Alert ───────────────────────────────────────── */
-    .alert-card {
+    .alert {
       background: linear-gradient(135deg, #FFF7E6, #FFF0D6);
       border: 2px solid var(--aws-orange);
-      border-radius: 10px; padding: 1rem 1.25rem;
-      margin-bottom: 1.5rem;
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
       display: flex; gap: 1rem; align-items: flex-start;
     }
-    .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .alert-card h3 { font-size: .9rem; font-weight: 700; color: #92400E; margin-bottom: .3rem; }
-    .alert-card p { font-size: .82rem; color: #78350F; line-height: 1.5; }
-    .alert-card strong { color: #B45309; }
+    .alert-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; }
+    .alert h3 { font-size: .88rem; font-weight: 700; color: #92400E; margin-bottom: .25rem; }
+    .alert p  { font-size: .82rem; color: #78350F; line-height: 1.55; }
+    .alert strong { color: #B45309; }
 
     /* ── Progress ────────────────────────────────────── */
-    .progress-section {
-      background: var(--white); border: 1px solid var(--gray-200);
-      border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;
-    }
-    .progress-section h3 { font-size: .85rem; font-weight: 700; color: var(--gft-navy); margin-bottom: .75rem; }
-    .progress-bar-wrap { background: var(--gray-100); border-radius: 6px; height: 10px; overflow: hidden; margin-bottom: .5rem; }
+    .progress-bar-wrap { background: var(--gray-100); border-radius: 6px; height: 10px; overflow: hidden; margin: .6rem 0 .4rem; }
     .progress-bar-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--gft-mid), var(--aws-orange)); }
     .progress-labels { display: flex; justify-content: space-between; font-size: .72rem; color: var(--gray-500); }
 
-    /* ── Section title ───────────────────────────────── */
-    .section-title { display: flex; align-items: center; gap: .75rem; margin: 2rem 0 1rem; }
-    .section-title::before {
-      content: ''; width: 4px; height: 28px;
+    /* ── Section heading ─────────────────────────────── */
+    .section-heading {
+      display: flex; align-items: center; gap: .75rem;
+      margin: 2rem 0 1rem;
+    }
+    .section-heading::before {
+      content: ''; flex-shrink: 0;
+      width: 4px; height: 26px;
       background: linear-gradient(to bottom, var(--aws-orange), var(--gft-steel));
       border-radius: 2px;
     }
-    .section-title h2 { font-size: 1.1rem; font-weight: 700; color: var(--gft-navy); }
-    .section-title .badge {
+    .section-heading h2 { font-size: 1.05rem; font-weight: 700; color: var(--gft-navy); }
+    .section-heading .sh-badge {
+      font-size: .7rem; font-weight: 600;
+      padding: .15rem .55rem; border-radius: 10px;
       background: var(--gft-pale); color: var(--gft-blue);
-      font-size: .72rem; font-weight: 600;
-      padding: .15rem .5rem; border-radius: 10px;
+    }
+    .section-heading .sh-badge.new {
+      background: #FFF0F0; color: #B91C1C;
+      border: 1px solid #FCA5A5;
     }
 
-    /* ── Week cards ──────────────────────────────────── */
-    .week-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+    /* ── Info section (SAP-C03 overview) ─────────────── */
+    .info-section {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .info-header {
+      background: linear-gradient(90deg, var(--gft-navy), var(--aws-dark));
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
+    }
+    .info-header h2 { color: var(--white); font-size: 1rem; font-weight: 800; }
+    .info-header span { color: var(--aws-orange); font-size: .78rem; font-weight: 600; }
+
+    .info-body { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+    /* sub-section label inside info */
+    .sub-label {
+      font-size: .7rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: var(--gft-mid); margin-bottom: .75rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .sub-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: var(--gray-200);
+    }
+
+    /* dates row */
+    .dates-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .75rem;
+    }
+    .date-box {
+      border-radius: 8px; padding: .85rem 1rem;
+      text-align: center;
+    }
+    .date-box.blue   { background: #EFF6FF; }
+    .date-box.orange { background: #FFF7E6; border: 2px solid var(--aws-orange); }
+    .date-box.green  { background: #F0FDF4; }
+    .date-box .db-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--gray-500); margin-bottom: .2rem; }
+    .date-box .db-date  { font-size: 1rem; font-weight: 900; color: var(--gft-navy); }
+    .date-box .db-desc  { font-size: .7rem; color: var(--gray-500); margin-top: .15rem; }
+
+    /* pillars grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: .75rem;
+    }
+    .pillar {
+      border-radius: 8px; padding: .85rem 1rem;
+      border-left: 3px solid;
+    }
+    .pillar.p-ai    { background: #FFF7E6; border-color: var(--aws-orange); }
+    .pillar.p-res   { background: #EFF6FF; border-color: #3B82F6; }
+    .pillar.p-nat   { background: #F0FDF4; border-color: #22C55E; }
+    .pillar.p-dev   { background: #FAF5FF; border-color: #A855F7; }
+    .pillar.p-data  { background: #FFF1F2; border-color: #F43F5E; }
+    .pillar .p-badge {
+      display: inline-block; font-size: .6rem; font-weight: 700;
+      background: var(--aws-orange); color: var(--aws-dark);
+      padding: .1rem .4rem; border-radius: 4px; margin-bottom: .3rem;
+    }
+    .pillar h4 {
+      font-size: .78rem; font-weight: 700; margin-bottom: .3rem;
+    }
+    .pillar.p-ai   h4 { color: #B45309; }
+    .pillar.p-res  h4 { color: #1D4ED8; }
+    .pillar.p-nat  h4 { color: #15803D; }
+    .pillar.p-dev  h4 { color: #7C3AED; }
+    .pillar.p-data h4 { color: #BE123C; }
+    .pillar p { font-size: .78rem; color: var(--gray-700); line-height: 1.5; }
+
+    /* compare table */
+    .compare-wrap { overflow-x: auto; }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+    .compare-table thead tr { background: var(--gft-navy); }
+    .compare-table th {
+      color: var(--white); padding: .55rem .85rem;
+      text-align: left; font-size: .72rem; font-weight: 700;
+      letter-spacing: .04em; white-space: nowrap;
+    }
+    .compare-table td {
+      padding: .5rem .85rem;
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: top; line-height: 1.45;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:nth-child(even) td { background: var(--gray-50); }
+    .compare-table .c-aspect { font-weight: 600; color: var(--gft-navy); white-space: nowrap; width: 1%; }
+    .compare-table .c-new    { color: #B45309; }
+
+    /* domains list */
+    .domains-list { display: flex; flex-direction: column; gap: .4rem; }
+    .domain-row {
+      display: flex; align-items: center; gap: .75rem;
+      background: var(--gray-50); border-radius: 6px;
+      padding: .5rem .85rem; font-size: .82rem; color: var(--gray-700);
+    }
+    .domain-num {
+      background: var(--aws-orange); color: var(--aws-dark);
+      font-weight: 800; font-size: .7rem;
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* recommendations */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .75rem;
+    }
+    .rec-card {
+      background: var(--gray-50); border: 1px solid var(--gray-200);
+      border-radius: 8px; padding: .85rem 1rem;
+    }
+    .rec-card .rc-icon { font-size: 1.2rem; margin-bottom: .3rem; }
+    .rec-card h4 { font-size: .78rem; font-weight: 700; color: var(--gft-navy); margin-bottom: .3rem; }
+    .rec-card p  { font-size: .78rem; color: var(--gray-700); line-height: 1.5; }
+
+    /* callout */
+    .callout {
+      background: var(--gft-pale);
+      border-left: 4px solid var(--gft-mid);
+      border-radius: 0 8px 8px 0;
+      padding: .85rem 1rem;
+      font-size: .82rem; color: var(--gft-navy); line-height: 1.6;
+    }
+
+    /* sources */
+    .sources { display: flex; flex-direction: column; gap: .45rem; }
+    .sources a {
+      font-size: .82rem; color: var(--gft-mid);
+      text-decoration: none;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .sources a:hover { color: var(--gft-navy); text-decoration: underline; }
+    .sources a::before {
+      content: '↗'; color: var(--aws-orange);
+      font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── Week grid & cards ───────────────────────────── */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1rem;
+    }
     .week-card {
-      background: var(--white); border-radius: 10px;
+      background: var(--white); border-radius: var(--radius);
       border: 1px solid var(--gray-200); overflow: hidden;
       transition: box-shadow .2s, transform .2s;
     }
-    .week-card:hover { box-shadow: 0 4px 20px rgba(13,27,42,.12); transform: translateY(-2px); }
+    .week-card:hover { box-shadow: 0 4px 20px rgba(13,27,42,.1); transform: translateY(-2px); }
 
-    .week-header { padding: .75rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+    .week-header { padding: .7rem 1rem; display: flex; align-items: center; justify-content: space-between; }
     .week-header.done    { background: linear-gradient(90deg, #1a3550, #22477a); }
     .week-header.pending { background: linear-gradient(90deg, var(--aws-dark), #3B6186); }
     .week-header.new     { background: linear-gradient(90deg, #7C3200, #B34700); }
 
-    .week-label { color: var(--white); font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; opacity: .85; }
-    .week-dates { color: var(--white); font-size: .8rem; font-weight: 700; opacity: .95; }
-    .week-status { font-size: .7rem; padding: .2rem .6rem; border-radius: 10px; font-weight: 700; flex-shrink: 0; }
-    .week-status.done    { background: var(--done-bg); color: #15803D; }
-    .week-status.pending { background: #FEF3C7; color: #92400E; }
-    .week-status.new     { background: #FFF7E6; color: #92400E; }
+    .wh-meta { display: flex; flex-direction: column; gap: .1rem; }
+    .wh-label { color: var(--white); font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; opacity: .75; }
+    .wh-dates { color: var(--white); font-size: .82rem; font-weight: 700; }
+    .wh-status {
+      font-size: .68rem; padding: .2rem .6rem; border-radius: 10px;
+      font-weight: 700; flex-shrink: 0; white-space: nowrap;
+    }
+    .wh-status.done    { background: var(--done-bg); color: #15803D; }
+    .wh-status.pending { background: #FEF3C7; color: #92400E; }
+    .wh-status.new     { background: #FFF7E6; color: #92400E; }
 
     .week-body { padding: .75rem 1rem; }
-    .week-section-label {
-      font-size: .68rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .07em;
-      color: var(--gft-mid); margin: .6rem 0 .35rem;
+    .week-sub {
+      font-size: .67rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--gft-mid);
+      margin: .6rem 0 .3rem;
     }
-    .week-section-label:first-child { margin-top: 0; }
+    .week-sub:first-child { margin-top: 0; }
 
     /* ── Item list ───────────────────────────────────── */
     .item-list { list-style: none; }
@@ -171,38 +343,35 @@
     }
     .item-list li:last-child { border-bottom: none; }
 
-    /* icon */
-    .item-icon {
+    .i-icon {
       width: 16px; height: 16px; border-radius: 50%;
       flex-shrink: 0; margin-top: 2px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 9px;
+      font-size: 9px; font-weight: 700;
     }
-    .item-icon.done   { background: var(--done);      color: white; }
-    .item-icon.lab    { background: var(--gft-steel);  color: white; }
-    .item-icon.review { background: var(--aws-orange); color: white; }
-    .item-icon.new    { background: #F97316;           color: white; }
+    .i-icon.done   { background: var(--done);      color: white; }
+    .i-icon.lab    { background: var(--gft-steel);  color: white; }
+    .i-icon.review { background: var(--aws-orange); color: white; }
+    .i-icon.new    { background: #F97316;           color: white; }
 
-    /* link wrapper inside li */
-    .item-link {
+    .i-link {
       color: inherit; text-decoration: none;
       flex: 1; display: flex; align-items: flex-start;
-      gap: .4rem; flex-wrap: wrap;
+      gap: .35rem; flex-wrap: wrap;
     }
-    .item-link:hover { color: var(--gft-mid); text-decoration: underline; }
+    .i-link:hover { color: var(--gft-mid); text-decoration: underline; }
 
-    /* tags */
     .tag {
-      font-size: .65rem; padding: .1rem .4rem;
-      border-radius: 8px; font-weight: 600;
+      font-size: .62rem; padding: .1rem .4rem;
+      border-radius: 6px; font-weight: 700;
       white-space: nowrap; flex-shrink: 0;
       align-self: flex-start; margin-top: 2px;
     }
-    .tag.lab     { background: #EFF6FF; color: #1D4ED8; }
-    .tag.review  { background: #FFF7E6; color: #B45309; }
-    .tag.new-c03 { background: #FFF0F0; color: #B91C1C; border: 1px solid #FCA5A5; }
-    .tag.doc     { background: #F0FDF4; color: #15803D; }
-    .tag.free    { background: #F0FDF4; color: #166534; border: 1px solid #86EFAC; }
+    .tag.lab    { background: #EFF6FF; color: #1D4ED8; }
+    .tag.review { background: #FFF7E6; color: #B45309; }
+    .tag.c03    { background: #FFF0F0; color: #B91C1C; border: 1px solid #FCA5A5; }
+    .tag.free   { background: #F0FDF4; color: #166534; border: 1px solid #86EFAC; }
+    .tag.doc    { background: #F0FDF4; color: #15803D; }
 
     /* ── Exam card ───────────────────────────────────── */
     .exam-card {
@@ -213,32 +382,72 @@
     }
     .exam-card::before {
       content: ''; position: absolute; top: -30px; right: -30px;
-      width: 150px; height: 150px;
+      width: 160px; height: 160px;
       background: radial-gradient(circle, rgba(255,153,0,.25) 0%, transparent 70%);
       border-radius: 50%;
     }
-    .exam-card h2 { font-size: 1.4rem; font-weight: 900; margin-bottom: .3rem; position: relative; z-index: 1; }
+    .exam-card h2 { font-size: 1.35rem; font-weight: 900; margin-bottom: .3rem; position: relative; z-index: 1; }
     .exam-card h2 span { color: var(--aws-orange); }
-    .exam-card p { font-size: .85rem; opacity: .8; margin-bottom: .75rem; position: relative; z-index: 1; }
-    .exam-chips { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; position: relative; z-index: 1; }
-    .exam-chip { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25); border-radius: 20px; padding: .3rem .9rem; font-size: .78rem; font-weight: 600; }
-    .exam-chip.highlight { background: var(--aws-orange); color: var(--aws-dark); border-color: var(--aws-orange); font-weight: 800; }
+    .exam-card p { font-size: .85rem; opacity: .75; margin-bottom: .85rem; position: relative; z-index: 1; }
+    .exam-chips { display: flex; justify-content: center; gap: .6rem; flex-wrap: wrap; position: relative; z-index: 1; }
+    .exam-chip { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; padding: .3rem .85rem; font-size: .78rem; font-weight: 600; }
+    .exam-chip.hl { background: var(--aws-orange); color: var(--aws-dark); border-color: var(--aws-orange); font-weight: 800; }
+
+    /* ── Countdown ───────────────────────────────────── */
+    .countdown-bar {
+      background: linear-gradient(90deg, var(--gft-navy) 0%, #1a2e45 50%, var(--aws-dark) 100%);
+      padding: .65rem 2rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .cd-label {
+      display: flex; align-items: center; gap: .5rem;
+      color: var(--gft-pale); font-size: .78rem; font-weight: 600;
+    }
+    .cd-label span.trophy { font-size: 1rem; }
+    .cd-units {
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .cd-unit {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 6px;
+      padding: .3rem .55rem;
+      text-align: center; min-width: 52px;
+    }
+    .cd-unit .cd-num {
+      font-size: 1.1rem; font-weight: 900;
+      color: var(--aws-orange); display: block;
+      line-height: 1;
+    }
+    .cd-unit .cd-lbl {
+      font-size: .55rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .06em; color: rgba(255,255,255,.5);
+      display: block; margin-top: .15rem;
+    }
+    .cd-sep { color: rgba(255,255,255,.3); font-weight: 700; font-size: .9rem; }
+    .cd-done {
+      color: var(--done); font-weight: 700; font-size: .85rem;
+    }
 
     /* ── Footer ──────────────────────────────────────── */
-    footer { background: var(--gft-navy); color: rgba(255,255,255,.5); text-align: center; padding: 1rem; font-size: .75rem; }
+    footer { background: var(--gft-navy); color: rgba(255,255,255,.45); text-align: center; padding: 1rem; font-size: .75rem; }
     footer span { color: var(--aws-orange); font-weight: 600; }
 
-    @media (max-width: 600px) {
-      header { padding: 1.25rem 1rem 1rem; }
-      main   { padding: 1rem .75rem 2rem; }
-      .legend { padding: .75rem 1rem; }
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 640px) {
+      header  { padding: 1.25rem 1rem 1rem; }
+      main    { padding: 1rem .75rem 2rem; }
+      .legend { padding: .6rem 1rem; gap: .75rem; }
+      .dates-row { grid-template-columns: 1fr; }
       .week-grid { grid-template-columns: 1fr; }
+      .progress-labels { flex-direction: column; gap: .2rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- ── Header ──────────────────────────────────────────── -->
 <header>
   <div class="header-top">
     <div class="logo-gft">GFT</div>
@@ -247,192 +456,249 @@
   </div>
   <h1>Cronograma de Estudos<br><span>AWS Solutions Architect – Professional</span></h1>
   <div class="header-meta">
-    <div class="meta-chip"><span class="dot"></span>SAP-C03 (novo)</div>
+    <div class="meta-chip"><span class="dot"></span>SAP-C03</div>
     <div class="meta-chip"><span class="dot"></span>Prova: 05 de dezembro de 2026</div>
-    <div class="meta-chip"><span class="dot"></span>75 questões · 180 minutos · USD 300</div>
+    <div class="meta-chip"><span class="dot"></span>75 questões · 180 min · USD 300</div>
   </div>
 </header>
 
-<!-- Legend -->
+<!-- ── Countdown bar ────────────────────────────────────── -->
+<div class="countdown-bar">
+  <div class="cd-label">
+    <span class="trophy">🏆</span>
+    Data final do programa Awards 2026 — 10 de dezembro
+  </div>
+  <div class="cd-units" id="countdown">
+    <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Dias</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">Horas</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">Min</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl">Seg</span></div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var target = new Date('2026-12-10T23:59:59');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      var now  = new Date();
+      var diff = target - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML =
+          '<span class="cd-done">🎉 Prazo encerrado!</span>';
+        return;
+      }
+
+      var days  = Math.floor(diff / 86400000);
+      var hours = Math.floor((diff % 86400000) / 3600000);
+      var mins  = Math.floor((diff % 3600000)  /   60000);
+      var secs  = Math.floor((diff %   60000)  /    1000);
+
+      document.getElementById('cd-days').textContent  = pad(days);
+      document.getElementById('cd-hours').textContent = pad(hours);
+      document.getElementById('cd-mins').textContent  = pad(mins);
+      document.getElementById('cd-secs').textContent  = pad(secs);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+<!-- ── Legend ───────────────────────────────────────────── -->
 <div class="legend">
-  <span style="font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.06em">Legenda:</span>
-  <div class="legend-item"><div class="legend-badge" style="background:var(--gft-mid)"></div>Módulo</div>
-  <div class="legend-item"><div class="legend-badge" style="background:var(--gft-steel)"></div>Lab</div>
-  <div class="legend-item"><div class="legend-badge" style="background:var(--aws-orange)"></div>Review / Prática</div>
-  <div class="legend-item"><div class="legend-badge" style="background:#F97316"></div>Novo SAP-C03</div>
-  <div class="legend-item"><div class="legend-badge" style="background:var(--done)"></div>Concluído</div>
+  <span class="legend-label">Legenda</span>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--gft-mid)"></div>Módulo</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--gft-steel)"></div>Lab</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--aws-orange)"></div>Review</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#F97316"></div>Novo SAP-C03</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--done)"></div>Concluído</div>
 </div>
 
 <main>
 
-  <!-- Alert -->
-  <div class="alert-card">
+  <!-- ── Alerta ────────────────────────────────────────── -->
+  <div class="alert">
     <div class="alert-icon">⚠️</div>
     <div>
       <h3>Atenção: sua prova é SAP-C03</h3>
-      <p>O SAP-C02 encerra em <strong>16/11/2026</strong>. Sua prova (05/12) cai no <strong>SAP-C03</strong>.
-      Quando o registro abrir em <strong>27/10/2026</strong>, confirme o agendamento.
-      As semanas 13–15 cobrem as novidades exclusivas do C03.</p>
+      <p>O SAP-C02 encerra em <strong>16/11/2026</strong>. Sua prova (05/12) cai automaticamente no <strong>SAP-C03</strong>. Quando o registro abrir em <strong>27/10/2026</strong>, confirme o agendamento na nova versão. As semanas 13–15 cobrem as novidades exclusivas do C03.</p>
     </div>
   </div>
 
-  <!-- ══ SOBRE O SAP-C03 ══════════════════════════════ -->
+  <!-- ── Sobre o SAP-C03 ───────────────────────────────── -->
   <div class="info-section">
-    <h2>Sobre a Atualização SAP-C02 → SAP-C03</h2>
-
-    <!-- Datas -->
-    <div class="dates-strip">
-      <div class="date-item d1">
-        <div class="date-label">Registro abre</div>
-        <div class="date-value">27/10/2026</div>
-        <div class="date-desc">Guia completo publicado</div>
-      </div>
-      <div class="date-item d2">
-        <div class="date-label">⚠️ Último dia SAP-C02</div>
-        <div class="date-value">16/11/2026</div>
-        <div class="date-desc">Após essa data só existe C03</div>
-      </div>
-      <div class="date-item d3">
-        <div class="date-label">SAP-C03 disponível</div>
-        <div class="date-value">17/11/2026</div>
-        <div class="date-desc">Disponível em todos os idiomas</div>
-      </div>
+    <div class="info-header">
+      <h2>Sobre a Atualização SAP-C02 → SAP-C03</h2>
+      <span>Fonte: AWS Training and Certification Blog · Set/2026</span>
     </div>
 
-    <!-- 5 pilares de mudança -->
-    <p style="font-size:.8rem;font-weight:700;color:var(--gft-navy);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em">O que muda no SAP-C03</p>
-    <div class="pillars">
-      <div class="pillar ai">
-        <span class="new-badge">★ Grande novidade</span>
-        <h4>1. IA Generativa e Arquiteturas Agênticas</h4>
-        <p>Amazon Bedrock, Bedrock AgentCore, arquiteturas RAG, Guardrails e fluxos de aprovação com supervisão humana. O arquiteto precisará integrar IA às soluções corporativas com segurança e governança.</p>
-      </div>
-      <div class="pillar res">
-        <h4>2. Resiliência e Recuperação de Desastres</h4>
-        <p>Engenharia de resiliência com AWS Fault Injection Service, AWS Resilience Hub e AWS Application Recovery Controller. Runbooks automatizados com AWS Systems Manager.</p>
-      </div>
-      <div class="pillar native">
-        <h4>3. Arquiteturas Cloud-Native Modernas</h4>
-        <p>Pipelines serverless, workflows duráveis com Step Functions, service mesh, arquiteturas multi-tenant e processamento de dados em tempo real.</p>
-      </div>
-      <div class="pillar devsec">
-        <h4>4. DevSecOps, Observabilidade e Automação</h4>
-        <p>Análise de vulnerabilidades em pipelines, implantações multi-conta, monitoramento de contêineres, métricas de IA/ML e monitoramento sintético e de usuários reais.</p>
-      </div>
-      <div class="pillar data">
-        <h4>5. Dados, Analytics e Criptografia Pós-Quântica</h4>
-        <p>Lakehouse com Lake Formation e Apache Iceberg, compartilhamento via AWS Clean Rooms e criptografia pós-quântica com algoritmos ML-DSA e ML-KEM no AWS KMS.</p>
-      </div>
-    </div>
+    <div class="info-body">
 
-    <!-- Comparativo -->
-    <p style="font-size:.8rem;font-weight:700;color:var(--gft-navy);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em">Comparativo SAP-C02 × SAP-C03</p>
-    <div style="overflow-x:auto;margin-bottom:1.25rem">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Aspecto</th>
-            <th>SAP-C02 — atual</th>
-            <th>SAP-C03 — nova versão</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-aspect">Organização</td>
-            <td>4 domínios</td>
-            <td class="col-new"><strong>5 domínios</strong></td>
-          </tr>
-          <tr>
-            <td class="col-aspect">Arquitetura</td>
-            <td>Complexidade organizacional e novas soluções</td>
-            <td class="col-new">Arquitetura cloud-native e implementação</td>
-          </tr>
-          <tr>
-            <td class="col-aspect">IA Generativa</td>
-            <td>Tópicos emergentes</td>
-            <td class="col-new">Integração explícita e aprofundada</td>
-          </tr>
-          <tr>
-            <td class="col-aspect">Segurança</td>
-            <td>Segurança e governança arquitetural</td>
-            <td class="col-new">Segurança, compliance, governança <strong>+ criptografia pós-quântica</strong></td>
-          </tr>
-          <tr>
-            <td class="col-aspect">Resiliência</td>
-            <td>Confiabilidade, recuperação e continuidade</td>
-            <td class="col-new">Engenharia de resiliência e testes de falha</td>
-          </tr>
-          <tr>
-            <td class="col-aspect">Operações</td>
-            <td>Melhoria contínua e otimização</td>
-            <td class="col-new">Automação, DevSecOps e observabilidade</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 5 Domínios SAP-C03 -->
-    <p style="font-size:.8rem;font-weight:700;color:var(--gft-navy);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em">Os 5 Domínios do SAP-C03</p>
-    <div class="domains-list">
-      <div class="domain-item"><div class="domain-num">1</div>Cloud-Native Architecture Design and Implementation</div>
-      <div class="domain-item"><div class="domain-num">2</div>Security, Compliance, and Governance</div>
-      <div class="domain-item"><div class="domain-num">3</div>Cost-Optimized Architecture Design</div>
-      <div class="domain-item"><div class="domain-num">4</div>Resilience, Migration, and Business Continuity</div>
-      <div class="domain-item"><div class="domain-num">5</div>Operational Excellence and Automation</div>
-    </div>
-
-    <!-- Recomendações -->
-    <p style="font-size:.8rem;font-weight:700;color:var(--gft-navy);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em">O que fazer dependendo do seu momento</p>
-    <div class="rec-grid">
-      <div class="rec-card">
-        <div class="rec-icon">🏃</div>
-        <h4>Perto de fazer a prova</h4>
-        <p>Priorize a SAP-C02, desde que consiga agendar antes de 16/11/2026.</p>
+      <!-- Datas -->
+      <div>
+        <p class="sub-label">Datas importantes</p>
+        <div class="dates-row">
+          <div class="date-box blue">
+            <div class="db-label">Registro abre</div>
+            <div class="db-date">27/10/2026</div>
+            <div class="db-desc">Guia completo publicado</div>
+          </div>
+          <div class="date-box orange">
+            <div class="db-label">⚠️ Último dia SAP-C02</div>
+            <div class="db-date">16/11/2026</div>
+            <div class="db-desc">Após esta data só existe C03</div>
+          </div>
+          <div class="date-box green">
+            <div class="db-label">SAP-C03 disponível</div>
+            <div class="db-date">17/11/2026</div>
+            <div class="db-desc">Todos os idiomas</div>
+          </div>
+        </div>
       </div>
-      <div class="rec-card">
-        <div class="rec-icon">🌱</div>
-        <h4>Início dos estudos</h4>
-        <p>Avalie já estudar para a SAP-C03 e inclua os novos temas no plano desde o começo.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-icon">📚</div>
-        <h4>No meio da preparação</h4>
-        <p>Não descarte o que estudou. Redes, segurança, BD, migração e custos continuam válidos. Complemente com IA, resiliência e DevSecOps.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-icon">🏢</div>
-        <h4>Programa GFT</h4>
-        <p>Atualizar planos de estudo identificando quais conteúdos permanecem válidos e quais precisam de revisão.</p>
-      </div>
-    </div>
 
-    <!-- Avaliação -->
-    <div style="background:var(--gft-pale);border-left:4px solid var(--gft-mid);border-radius:0 8px 8px 0;padding:.85rem 1rem;margin-top:1rem;font-size:.82rem;color:var(--gft-navy);line-height:1.6">
-      <strong>Avaliação:</strong> Não é uma mudança que invalida toda a preparação anterior, mas também não é seguro tratar a SAP-C03 como simples atualização de nomenclatura. A ampliação de IA agêntica, resiliência, DevSecOps e criptografia pós-quântica exige revisão real do material.
-    </div>
+      <!-- O que muda -->
+      <div>
+        <p class="sub-label">O que muda no SAP-C03</p>
+        <div class="pillars-grid">
+          <div class="pillar p-ai">
+            <span class="p-badge">★ Grande novidade</span>
+            <h4>1. IA Generativa e Arquiteturas Agênticas</h4>
+            <p>Amazon Bedrock, Bedrock AgentCore, arquiteturas RAG, Guardrails e fluxos com supervisão humana. O arquiteto precisará integrar IA às soluções corporativas com segurança e governança.</p>
+          </div>
+          <div class="pillar p-res">
+            <h4>2. Resiliência e Recuperação de Desastres</h4>
+            <p>Engenharia de resiliência com AWS Fault Injection Service, Resilience Hub e Application Recovery Controller. Runbooks automatizados com AWS Systems Manager.</p>
+          </div>
+          <div class="pillar p-nat">
+            <h4>3. Arquiteturas Cloud-Native Modernas</h4>
+            <p>Pipelines serverless, workflows duráveis com Step Functions, service mesh, arquiteturas multi-tenant e processamento de dados em tempo real.</p>
+          </div>
+          <div class="pillar p-dev">
+            <h4>4. DevSecOps, Observabilidade e Automação</h4>
+            <p>Análise de vulnerabilidades em pipelines, implantações multi-conta, monitoramento de contêineres, métricas de IA/ML e monitoramento sintético.</p>
+          </div>
+          <div class="pillar p-data">
+            <h4>5. Dados, Analytics e Criptografia Pós-Quântica</h4>
+            <p>Lakehouse com Lake Formation e Apache Iceberg, compartilhamento via AWS Clean Rooms e criptografia pós-quântica com ML-DSA e ML-KEM no KMS.</p>
+          </div>
+        </div>
+      </div>
 
-    <!-- Fontes oficiais -->
-    <p style="font-size:.8rem;font-weight:700;color:var(--gft-navy);margin:.1.25rem 0 .75rem;text-transform:uppercase;letter-spacing:.05em;margin-top:1.25rem">Fontes Oficiais</p>
-    <div style="display:flex;flex-direction:column;gap:.4rem">
-      <a href="https://aws.amazon.com/pt/certification/certified-solutions-architect-professional/" target="_blank" rel="noopener"
-         style="font-size:.82rem;color:var(--gft-mid);text-decoration:none;display:flex;align-items:center;gap:.4rem">
-        <span style="color:var(--aws-orange)">↗</span> Página oficial da certificação AWS SAP
-      </a>
-      <a href="https://aws.amazon.com/blogs/training-and-certification/" target="_blank" rel="noopener"
-         style="font-size:.82rem;color:var(--gft-mid);text-decoration:none;display:flex;align-items:center;gap:.4rem">
-        <span style="color:var(--aws-orange)">↗</span> Blog AWS Training and Certification
-      </a>
-      <a href="https://docs.aws.amazon.com/pt_br/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html" target="_blank" rel="noopener"
-         style="font-size:.82rem;color:var(--gft-mid);text-decoration:none;display:flex;align-items:center;gap:.4rem">
-        <span style="color:var(--aws-orange)">↗</span> Guia oficial do exame SAP-C02
-      </a>
-    </div>
+      <!-- Comparativo -->
+      <div>
+        <p class="sub-label">Comparativo SAP-C02 × SAP-C03</p>
+        <div class="compare-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Aspecto</th>
+                <th>SAP-C02 — atual</th>
+                <th>SAP-C03 — nova versão</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="c-aspect">Organização</td>
+                <td>4 domínios</td>
+                <td class="c-new"><strong>5 domínios</strong></td>
+              </tr>
+              <tr>
+                <td class="c-aspect">Arquitetura</td>
+                <td>Complexidade organizacional e novas soluções</td>
+                <td class="c-new">Cloud-native e implementação</td>
+              </tr>
+              <tr>
+                <td class="c-aspect">IA Generativa</td>
+                <td>Tópicos emergentes</td>
+                <td class="c-new">Integração explícita e aprofundada</td>
+              </tr>
+              <tr>
+                <td class="c-aspect">Segurança</td>
+                <td>Segurança e governança arquitetural</td>
+                <td class="c-new">+ Criptografia pós-quântica</td>
+              </tr>
+              <tr>
+                <td class="c-aspect">Resiliência</td>
+                <td>Confiabilidade, recuperação e continuidade</td>
+                <td class="c-new">Engenharia de resiliência e testes de falha</td>
+              </tr>
+              <tr>
+                <td class="c-aspect">Operações</td>
+                <td>Melhoria contínua e otimização</td>
+                <td class="c-new">Automação, DevSecOps e observabilidade</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
+      <!-- Domínios -->
+      <div>
+        <p class="sub-label">Os 5 domínios do SAP-C03</p>
+        <div class="domains-list">
+          <div class="domain-row"><div class="domain-num">1</div>Cloud-Native Architecture Design and Implementation</div>
+          <div class="domain-row"><div class="domain-num">2</div>Security, Compliance, and Governance</div>
+          <div class="domain-row"><div class="domain-num">3</div>Cost-Optimized Architecture Design</div>
+          <div class="domain-row"><div class="domain-num">4</div>Resilience, Migration, and Business Continuity</div>
+          <div class="domain-row"><div class="domain-num">5</div>Operational Excellence and Automation</div>
+        </div>
+      </div>
+
+      <!-- Recomendações -->
+      <div>
+        <p class="sub-label">O que fazer dependendo do seu momento</p>
+        <div class="rec-grid">
+          <div class="rec-card">
+            <div class="rc-icon">🏃</div>
+            <h4>Perto de fazer a prova</h4>
+            <p>Priorize a SAP-C02, desde que consiga agendar antes de 16/11/2026.</p>
+          </div>
+          <div class="rec-card">
+            <div class="rc-icon">🌱</div>
+            <h4>Início dos estudos</h4>
+            <p>Avalie já estudar para a SAP-C03 e inclua os novos temas no plano desde o começo.</p>
+          </div>
+          <div class="rec-card">
+            <div class="rc-icon">📚</div>
+            <h4>No meio da preparação</h4>
+            <p>Não descarte o que estudou. Redes, segurança, BD, migração e custos continuam válidos. Complemente com IA, resiliência e DevSecOps.</p>
+          </div>
+          <div class="rec-card">
+            <div class="rc-icon">🏢</div>
+            <h4>Programa GFT</h4>
+            <p>Atualizar planos de estudo identificando quais conteúdos permanecem válidos e quais precisam de revisão.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avaliação -->
+      <div class="callout">
+        <strong>Avaliação:</strong> Não é uma mudança que invalida toda a preparação anterior, mas também não é seguro tratar a SAP-C03 como simples atualização de nomenclatura. A ampliação de IA agêntica, resiliência, DevSecOps e criptografia pós-quântica exige revisão real do material.
+      </div>
+
+      <!-- Fontes -->
+      <div>
+        <p class="sub-label">Fontes oficiais</p>
+        <div class="sources">
+          <a href="https://aws.amazon.com/pt/certification/certified-solutions-architect-professional/" target="_blank" rel="noopener">Página oficial da certificação AWS Solutions Architect – Professional</a>
+          <a href="https://aws.amazon.com/blogs/training-and-certification/" target="_blank" rel="noopener">Blog AWS Training and Certification</a>
+          <a href="https://docs.aws.amazon.com/pt_br/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html" target="_blank" rel="noopener">Guia oficial do exame SAP-C02</a>
+        </div>
+      </div>
+
+    </div><!-- /info-body -->
   </div><!-- /info-section -->
 
-  <!-- Progress -->
-  <div class="progress-section">
-    <h3>Progresso Geral — 15 semanas até a prova</h3>
+  <!-- ── Progresso ─────────────────────────────────────── -->
+  <div class="card">
+    <strong style="font-size:.85rem;color:var(--gft-navy)">Progresso Geral — 15 semanas até a prova</strong>
     <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:80%"></div></div>
     <div class="progress-labels">
       <span>Semanas 1–12: base SAP-C02 ✓</span>
@@ -441,445 +707,266 @@
     </div>
   </div>
 
-  <!-- ══ BLOCO 1 — Digital Classroom ══════════════════ -->
-  <div class="section-title">
+  <!-- ══ BLOCO 1 — Digital Classroom ═══════════════════════ -->
+  <div class="section-heading">
     <h2>Base do Curso — Digital Classroom</h2>
-    <span class="badge">Semanas 1–6 · Concluídas</span>
+    <span class="sh-badge">Semanas 1–6 · Concluídas</span>
   </div>
 
   <div class="week-grid">
 
-    <!-- S1 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semana 1</div><div class="week-dates">24 – 30 / ago</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semana 1</span><span class="wh-dates">24 – 30 / ago</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
-        <p class="week-section-label">Digital Classroom</p>
         <ul class="item-list">
-          <li>
-            <div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">
-              Module 1: Review Architecting Concepts
-            </a>
-          </li>
-          <li>
-            <div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">
-              Module 2: Single to Multiple Accounts
-            </a>
-          </li>
-          <li>
-            <div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">
-              Module 3: Hybrid Connectivity
-            </a>
-          </li>
-          <li>
-            <div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">
-              Lab 1 (Opt.): Securing Amazon S3 VPC Endpoint <span class="tag lab">Lab</span>
-            </a>
-          </li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 1: Review Architecting Concepts</a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 2: Single to Multiple Accounts</a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 3: Hybrid Connectivity</a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 1 (Opt.): Securing Amazon S3 VPC Endpoint <span class="tag lab">Lab</span></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S2 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semana 2</div><div class="week-dates">31/ago – 06/set</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semana 2</span><span class="wh-dates">31/ago – 06/set</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 4: Specialized Infrastructure</a>
-          </li>
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 5: Connecting Networks</a>
-          </li>
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 6: Containers</a>
-          </li>
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 2: Configuring AWS Transit Gateway <span class="tag lab">Lab</span></a>
-          </li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 4: Specialized Infrastructure</a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 5: Connecting Networks</a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 6: Containers</a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 2: Configuring AWS Transit Gateway <span class="tag lab">Lab</span></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S3 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semana 3</div><div class="week-dates">07 – 13 / set</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semana 3</span><span class="wh-dates">07 – 13 / set</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 3: Deploying App with ECS on Fargate <span class="tag lab">Lab</span></a>
-          </li>
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 7: CI/CD</a>
-          </li>
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 8: High Availability and DDoS</a>
-          </li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 3: Deploying App with ECS on Fargate <span class="tag lab">Lab</span></a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 7: CI/CD</a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 8: High Availability and DDoS</a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S4 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semana 4</div><div class="week-dates">14 – 20 / set</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semana 4</span><span class="wh-dates">14 – 20 / set</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 9: Securing Data</a>
-          </li>
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 10: Large-Scale Data Stores</a>
-          </li>
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 4: Setting Up a Data Lake with Lake Formation <span class="tag lab">Lab</span></a>
-          </li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 9: Securing Data</a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 10: Large-Scale Data Stores</a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 4: Setting Up a Data Lake with Lake Formation <span class="tag lab">Lab</span></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S5 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semana 5</div><div class="week-dates">21 – 27 / set</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semana 5</span><span class="wh-dates">21 – 27 / set</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 11: Migrating Workloads</a>
-          </li>
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 12: Optimizing Cost</a>
-          </li>
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 5: Migrating NFS with DataSync & Storage Gateway <span class="tag lab">Lab</span></a>
-          </li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 11: Migrating Workloads</a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 12: Optimizing Cost</a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 5: Migrating NFS with DataSync & Storage Gateway <span class="tag lab">Lab</span></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S6 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semana 6</div><div class="week-dates">28/set – 04/out</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semana 6</span><span class="wh-dates">28/set – 04/out</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 13: Architecting for the Edge</a>
-          </li>
-          <li><div class="item-icon done">✓</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Post-Assessment</a>
-          </li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 13: Architecting for the Edge</a></li>
+          <li><div class="i-icon done">✓</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Post-Assessment</a></li>
         </ul>
       </div>
     </div>
 
-  </div><!-- /week-grid -->
+  </div>
 
-  <!-- ══ BLOCO 2 — Labs Adicionais ═════════════════════ -->
-  <div class="section-title">
+  <!-- ══ BLOCO 2 — Labs Adicionais ═════════════════════════ -->
+  <div class="section-heading">
     <h2>Labs Adicionais</h2>
-    <span class="badge">Semanas 7–10 · Concluídas</span>
+    <span class="sh-badge">Semanas 7–10 · Concluídas</span>
   </div>
 
   <div class="week-grid">
 
-    <!-- S7 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semana 7</div><div class="week-dates">05 – 11 / out</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semana 7</span><span class="wh-dates">05 – 11 / out</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Creating Amazon VPC with CloudFormation <span class="tag lab">Lab</span></a>
-          </li>
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Building VPC, S3, EC2, RDS with Service Catalog <span class="tag lab">Lab</span></a>
-          </li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Creating Amazon VPC with CloudFormation <span class="tag lab">Lab</span></a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Building VPC, S3, EC2, RDS with Service Catalog <span class="tag lab">Lab</span></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S8 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semana 8</div><div class="week-dates">12 – 18 / out</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semana 8</span><span class="wh-dates">12 – 18 / out</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: VPC Logging and Troubleshooting <span class="tag lab">Lab</span></a>
-          </li>
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: VPC Peering vs Transit Gateway <span class="tag lab">Lab</span></a>
-          </li>
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Configuring High Availability <span class="tag lab">Lab</span></a>
-          </li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: VPC Logging and Troubleshooting <span class="tag lab">Lab</span></a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: VPC Peering vs Transit Gateway <span class="tag lab">Lab</span></a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Configuring High Availability <span class="tag lab">Lab</span></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S9-10 -->
     <div class="week-card">
       <div class="week-header done">
-        <div><div class="week-label">Semanas 9–10</div><div class="week-dates">19/out – 01/nov</div></div>
-        <span class="week-status done">✓ Concluído</span>
+        <div class="wh-meta"><span class="wh-label">Semanas 9–10</span><span class="wh-dates">19/out – 01/nov</span></div>
+        <span class="wh-status done">✓ Concluído</span>
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Automating Backups with AWS Backup <span class="tag lab">Lab</span></a>
-          </li>
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Migrate On-Premises DB with AWS DMS <span class="tag lab">Lab</span></a>
-          </li>
-          <li><div class="item-icon lab">L</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Migrating NFS with DataSync & Storage Gateway <span class="tag lab">Lab</span></a>
-          </li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Automating Backups with AWS Backup <span class="tag lab">Lab</span></a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Migrate On-Premises DB with AWS DMS <span class="tag lab">Lab</span></a></li>
+          <li><div class="i-icon lab">L</div><a class="i-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Migrating NFS with DataSync & Storage Gateway <span class="tag lab">Lab</span></a></li>
         </ul>
       </div>
     </div>
 
   </div>
 
-  <!-- ══ BLOCO 3 — Domain Review ════════════════════════ -->
-  <div class="section-title">
+  <!-- ══ BLOCO 3 — Domain Review ═══════════════════════════ -->
+  <div class="section-heading">
     <h2>Domain Review — SAP-C02</h2>
-    <span class="badge">Semanas 11–12 · Em andamento</span>
+    <span class="sh-badge">Semanas 11–12 · Em andamento</span>
   </div>
 
   <div class="week-grid">
 
-    <!-- S11 -->
     <div class="week-card">
       <div class="week-header pending">
-        <div><div class="week-label">Semana 11</div><div class="week-dates">02 – 08 / nov</div></div>
-        <span class="week-status pending">⏳ Em andamento</span>
+        <div class="wh-meta"><span class="wh-label">Semana 11</span><span class="wh-dates">02 – 08 / nov</span></div>
+        <span class="wh-status pending">⏳ Em andamento</span>
       </div>
       <div class="week-body">
-        <p class="week-section-label">Domain 1 & 2</p>
+        <p class="week-sub">Domain 1 & 2</p>
         <ul class="item-list">
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/NYGJW6MGA8/domain-1-review-aws-certified-solutions-architect--professional-sapc02--english/T1N6FVN74Q" target="_blank" rel="noopener">
-              Domain 1 Review <span class="tag review">Review</span>
-            </a>
-          </li>
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/NYGJW6MGA8/domain-1-review-aws-certified-solutions-architect--professional-sapc02--english/T1N6FVN74Q" target="_blank" rel="noopener">
-              Domain 1 Practice
-            </a>
-          </li>
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/2S2E5KT1XU/domain-2-review-aws-certified-solutions-architect--professional-sapc02--english/Y7H2637GTS" target="_blank" rel="noopener">
-              Domain 2 Review <span class="tag review">Review</span>
-            </a>
-          </li>
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/2S2E5KT1XU/domain-2-review-aws-certified-solutions-architect--professional-sapc02--english/Y7H2637GTS" target="_blank" rel="noopener">
-              Domain 2 Practice
-            </a>
-          </li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://skillbuilder.aws/learn/NYGJW6MGA8/domain-1-review-aws-certified-solutions-architect--professional-sapc02--english/T1N6FVN74Q" target="_blank" rel="noopener">Domain 1 Review <span class="tag review">Review</span></a></li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://skillbuilder.aws/learn/NYGJW6MGA8/domain-1-review-aws-certified-solutions-architect--professional-sapc02--english/T1N6FVN74Q" target="_blank" rel="noopener">Domain 1 Practice</a></li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://skillbuilder.aws/learn/2S2E5KT1XU/domain-2-review-aws-certified-solutions-architect--professional-sapc02--english/Y7H2637GTS" target="_blank" rel="noopener">Domain 2 Review <span class="tag review">Review</span></a></li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://skillbuilder.aws/learn/2S2E5KT1XU/domain-2-review-aws-certified-solutions-architect--professional-sapc02--english/Y7H2637GTS" target="_blank" rel="noopener">Domain 2 Practice</a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S12 -->
     <div class="week-card">
       <div class="week-header pending">
-        <div><div class="week-label">Semana 12</div><div class="week-dates">09 – 15 / nov</div></div>
-        <span class="week-status pending">⏳ Próxima</span>
+        <div class="wh-meta"><span class="wh-label">Semana 12</span><span class="wh-dates">09 – 15 / nov</span></div>
+        <span class="wh-status pending">⏳ Próxima</span>
       </div>
       <div class="week-body">
-        <p class="week-section-label">Domain 3 & 4</p>
+        <p class="week-sub">Domain 3 & 4</p>
         <ul class="item-list">
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/GE9DGKYPF6/domain-3-review-aws-certified-solutions-architect--professional-sapc02--english/RKVCYQN75Y" target="_blank" rel="noopener">
-              Domain 3 Review <span class="tag review">Review</span>
-            </a>
-          </li>
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/GE9DGKYPF6/domain-3-review-aws-certified-solutions-architect--professional-sapc02--english/RKVCYQN75Y" target="_blank" rel="noopener">
-              Domain 3 Practice
-            </a>
-          </li>
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/BR1SGAWFJY/domain-4-review-aws-certified-solutions-architect--professional-sapc02--english/F4H2F4G6YU" target="_blank" rel="noopener">
-              Domain 4 Review <span class="tag review">Review</span>
-            </a>
-          </li>
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://skillbuilder.aws/learn/BR1SGAWFJY/domain-4-review-aws-certified-solutions-architect--professional-sapc02--english/F4H2F4G6YU" target="_blank" rel="noopener">
-              Domain 4 Practice
-            </a>
-          </li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://skillbuilder.aws/learn/GE9DGKYPF6/domain-3-review-aws-certified-solutions-architect--professional-sapc02--english/RKVCYQN75Y" target="_blank" rel="noopener">Domain 3 Review <span class="tag review">Review</span></a></li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://skillbuilder.aws/learn/GE9DGKYPF6/domain-3-review-aws-certified-solutions-architect--professional-sapc02--english/RKVCYQN75Y" target="_blank" rel="noopener">Domain 3 Practice</a></li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://skillbuilder.aws/learn/BR1SGAWFJY/domain-4-review-aws-certified-solutions-architect--professional-sapc02--english/F4H2F4G6YU" target="_blank" rel="noopener">Domain 4 Review <span class="tag review">Review</span></a></li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://skillbuilder.aws/learn/BR1SGAWFJY/domain-4-review-aws-certified-solutions-architect--professional-sapc02--english/F4H2F4G6YU" target="_blank" rel="noopener">Domain 4 Practice</a></li>
         </ul>
       </div>
     </div>
 
   </div>
 
-  <!-- ══ BLOCO 4 — Complemento SAP-C03 ═════════════════ -->
-  <div class="section-title">
+  <!-- ══ BLOCO 4 — Complemento SAP-C03 ═════════════════════ -->
+  <div class="section-heading">
     <h2>Complemento SAP-C03 — Novos Tópicos</h2>
-    <span class="badge" style="background:#FFF0F0;color:#B91C1C;border:1px solid #FCA5A5">Semanas 13–15 · NOVO</span>
+    <span class="sh-badge new">Semanas 13–15 · NOVO</span>
   </div>
 
   <div class="week-grid">
 
-    <!-- S13 -->
     <div class="week-card">
       <div class="week-header new">
-        <div><div class="week-label">Semana 13</div><div class="week-dates">16 – 22 / nov</div></div>
-        <span class="week-status new">🆕 SAP-C03</span>
+        <div class="wh-meta"><span class="wh-label">Semana 13</span><span class="wh-dates">16 – 22 / nov</span></div>
+        <span class="wh-status new">🆕 SAP-C03</span>
       </div>
       <div class="week-body">
-        <p class="week-section-label">Generative AI & Agentic AI — 11 novas habilidades</p>
+        <p class="week-sub">Generative AI & Agentic AI — 11 novas habilidades</p>
         <ul class="item-list">
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/17556/amazon-bedrock-getting-started" target="_blank" rel="noopener">
-              Amazon Bedrock Getting Started <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/17929/building-generative-ai-applications-using-amazon-bedrock" target="_blank" rel="noopener">
-              Building Generative AI Apps with Amazon Bedrock <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://aws.amazon.com/bedrock/agents/" target="_blank" rel="noopener">
-              Amazon Bedrock AgentCore — Agentes Autônomos <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/18494/foundations-of-prompt-engineering" target="_blank" rel="noopener">
-              RAG Architecture + Prompt Engineering <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener">
-              Bedrock Guardrails — Content Filtering <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-use-augmented-ai-a2i-human-review-loops.html" target="_blank" rel="noopener">
-              Human-in-the-loop com Amazon A2I <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/17556/amazon-bedrock-getting-started" target="_blank" rel="noopener">Amazon Bedrock Getting Started <span class="tag c03">C03</span><span class="tag free">Gratuito</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/17929/building-generative-ai-applications-using-amazon-bedrock" target="_blank" rel="noopener">Building Generative AI Apps with Amazon Bedrock <span class="tag c03">C03</span><span class="tag free">Gratuito</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://aws.amazon.com/bedrock/agents/" target="_blank" rel="noopener">Amazon Bedrock AgentCore — Agentes Autônomos <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/18494/foundations-of-prompt-engineering" target="_blank" rel="noopener">RAG Architecture + Prompt Engineering <span class="tag c03">C03</span><span class="tag free">Gratuito</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener">Bedrock Guardrails — Content Filtering <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-use-augmented-ai-a2i-human-review-loops.html" target="_blank" rel="noopener">Human-in-the-loop com Amazon A2I <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S14 -->
     <div class="week-card">
       <div class="week-header new">
-        <div><div class="week-label">Semana 14</div><div class="week-dates">23 – 29 / nov</div></div>
-        <span class="week-status new">🆕 SAP-C03</span>
+        <div class="wh-meta"><span class="wh-label">Semana 14</span><span class="wh-dates">23 – 29 / nov</span></div>
+        <span class="wh-status new">🆕 SAP-C03</span>
       </div>
       <div class="week-body">
-        <p class="week-section-label">Resiliência + Cloud-Native + DevSecOps</p>
+        <p class="week-sub">Resiliência + Cloud-Native + DevSecOps</p>
         <ul class="item-list">
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/1877/aws-fault-injection-service-getting-started" target="_blank" rel="noopener">
-              AWS Fault Injection Service — Getting Started <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/18528/resilience-on-aws-architecting-for-reliability" target="_blank" rel="noopener">
-              Resilience on AWS — Architecting for Reliability <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://aws.amazon.com/resilience-hub/" target="_blank" rel="noopener">
-              AWS Resilience Hub + App Recovery Controller <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/what-is-vpc-lattice.html" target="_blank" rel="noopener">
-              Amazon VPC Lattice — Service Mesh <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html" target="_blank" rel="noopener">
-              ECS Service Connect <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/15760/devsecops-on-aws" target="_blank" rel="noopener">
-              DevSecOps on AWS — Pipeline Security Scanning <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
-            </a>
-          </li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/1877/aws-fault-injection-service-getting-started" target="_blank" rel="noopener">AWS Fault Injection Service — Getting Started <span class="tag c03">C03</span><span class="tag free">Gratuito</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/18528/resilience-on-aws-architecting-for-reliability" target="_blank" rel="noopener">Resilience on AWS — Architecting for Reliability <span class="tag c03">C03</span><span class="tag free">Gratuito</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://aws.amazon.com/resilience-hub/" target="_blank" rel="noopener">AWS Resilience Hub + Application Recovery Controller <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/what-is-vpc-lattice.html" target="_blank" rel="noopener">Amazon VPC Lattice — Service Mesh <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html" target="_blank" rel="noopener">ECS Service Connect <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/15760/devsecops-on-aws" target="_blank" rel="noopener">DevSecOps on AWS — Pipeline Security Scanning <span class="tag c03">C03</span><span class="tag free">Gratuito</span></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- S15 -->
     <div class="week-card">
       <div class="week-header new">
-        <div><div class="week-label">Semana 15</div><div class="week-dates">30/nov – 04/dez</div></div>
-        <span class="week-status new">🆕 SAP-C03</span>
+        <div class="wh-meta"><span class="wh-label">Semana 15</span><span class="wh-dates">30/nov – 04/dez</span></div>
+        <span class="wh-status new">🆕 SAP-C03</span>
       </div>
       <div class="week-body">
-        <p class="week-section-label">Data & Analytics + Criptografia + Simulados</p>
+        <p class="week-sub">Data & Analytics + Criptografia + Simulados</p>
         <ul class="item-list">
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://docs.aws.amazon.com/lake-formation/latest/dg/apache-iceberg.html" target="_blank" rel="noopener">
-              Apache Iceberg + Lake Formation (Lakehouse) <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://aws.amazon.com/clean-rooms/" target="_blank" rel="noopener">
-              AWS Clean Rooms — Cross-Account Data Sharing <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
-          <li><div class="item-icon new">★</div>
-            <a class="item-link" href="https://docs.aws.amazon.com/kms/latest/developerguide/pqtls.html" target="_blank" rel="noopener">
-              Post-Quantum Cryptography: ML-DSA e ML-KEM no KMS <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
-            </a>
-          </li>
-          <li><div class="item-icon review">R</div>
-            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/13614/exam-prep-aws-certified-solutions-architect-professional-sap-c02" target="_blank" rel="noopener">
-              Exam Prep Official — Simulado Completo (75q · 180min) <span class="tag review">Simulado</span>
-            </a>
-          </li>
-          <li><div class="item-icon review">R</div>
-            <span class="item-link">Revisão das questões erradas</span>
-          </li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://docs.aws.amazon.com/lake-formation/latest/dg/apache-iceberg.html" target="_blank" rel="noopener">Apache Iceberg + Lake Formation (Lakehouse) <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://aws.amazon.com/clean-rooms/" target="_blank" rel="noopener">AWS Clean Rooms — Cross-Account Data Sharing <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
+          <li><div class="i-icon new">★</div><a class="i-link" href="https://docs.aws.amazon.com/kms/latest/developerguide/pqtls.html" target="_blank" rel="noopener">Post-Quantum Cryptography: ML-DSA e ML-KEM no KMS <span class="tag c03">C03</span><span class="tag doc">Doc</span></a></li>
+          <li><div class="i-icon review">R</div><a class="i-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/13614/exam-prep-aws-certified-solutions-architect-professional-sap-c02" target="_blank" rel="noopener">Exam Prep Oficial — Simulado Completo (75 q · 180 min) <span class="tag review">Simulado</span></a></li>
+          <li><div class="i-icon review">R</div><span class="i-link">Revisão das questões erradas</span></li>
         </ul>
       </div>
     </div>
 
   </div>
 
-  <!-- Exam Day -->
+  <!-- ── Dia da Prova ───────────────────────────────────── -->
   <div class="exam-card">
     <h2>🎯 Dia da Prova — <span>05 de dezembro de 2026</span></h2>
     <p>AWS Certified Solutions Architect – Professional</p>
     <div class="exam-chips">
-      <div class="exam-chip highlight">SAP-C03</div>
+      <div class="exam-chip hl">SAP-C03</div>
       <div class="exam-chip">75 questões</div>
       <div class="exam-chip">180 minutos</div>
-      <div class="exam-chip">USD 300</div>
+      <div class="exam-chip">🎫 Voucher 100% GFT</div>
       <div class="exam-chip">Disponível em PT-BR</div>
     </div>
   </div>
