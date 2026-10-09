@@ -5,38 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cronograma AWS SAP-C03 | GFT Technologies</title>
   <style>
-    /* ─── Design Tokens ─────────────────────────────────────────────── */
     :root {
-      /* GFT brand */
-      --gft-navy:    #0D1B2A;
-      --gft-blue:    #1A3550;
-      --gft-mid:     #3B6186;
-      --gft-steel:   #5B8DB8;
-      --gft-light:   #A8C8E8;
-      --gft-pale:    #D6E8F5;
-
-      /* AWS brand */
-      --aws-orange:  #FF9900;
-      --aws-dark:    #232F3E;
-      --aws-squid:   #161E2D;
-
-      /* Neutrals */
-      --white:       #FFFFFF;
-      --gray-50:     #F8FAFC;
-      --gray-100:    #EEF2F7;
-      --gray-200:    #D1DCE8;
-      --gray-500:    #6B7C93;
-      --gray-700:    #374151;
-
-      /* Status */
-      --done:        #22C55E;
-      --done-bg:     #DCFCE7;
-      --pending:     #F59E0B;
-      --pending-bg:  #FEF3C7;
-      --new:         #FF9900;
-      --new-bg:      #FFF7E6;
-      --exam:        #EF4444;
-      --exam-bg:     #FEE2E2;
+      --gft-navy:   #0D1B2A;
+      --gft-blue:   #1A3550;
+      --gft-mid:    #3B6186;
+      --gft-steel:  #5B8DB8;
+      --gft-light:  #A8C8E8;
+      --gft-pale:   #D6E8F5;
+      --aws-orange: #FF9900;
+      --aws-dark:   #232F3E;
+      --white:      #FFFFFF;
+      --gray-50:    #F8FAFC;
+      --gray-100:   #EEF2F7;
+      --gray-200:   #D1DCE8;
+      --gray-500:   #6B7C93;
+      --gray-700:   #374151;
+      --done:       #22C55E;
+      --done-bg:    #DCFCE7;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,10 +30,9 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--gray-50);
       color: var(--gray-700);
-      min-height: 100vh;
     }
 
-    /* ─── Header ────────────────────────────────────────────────────── */
+    /* ── Header ──────────────────────────────────────── */
     header {
       background: linear-gradient(135deg, var(--gft-navy) 0%, var(--aws-dark) 60%, #1a3550 100%);
       color: var(--white);
@@ -58,412 +42,208 @@
     }
     header::before {
       content: '';
-      position: absolute;
-      top: -40px; right: -40px;
+      position: absolute; top: -40px; right: -40px;
       width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(255,153,0,0.18) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255,153,0,.18) 0%, transparent 70%);
       border-radius: 50%;
     }
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: -60px; left: 30%;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(59,97,134,0.25) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
     .header-top {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1rem; flex-wrap: wrap;
     }
-
     .logo-gft {
-      background: var(--white);
-      color: var(--gft-navy);
-      font-weight: 900;
-      font-size: 1rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      letter-spacing: 0.05em;
-      flex-shrink: 0;
+      background: var(--white); color: var(--gft-navy);
+      font-weight: 900; font-size: 1rem;
+      padding: .3rem .7rem; border-radius: 4px;
     }
-
-    .logo-aws {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      flex-shrink: 0;
-    }
+    .logo-aws { display: flex; align-items: center; gap: .4rem; }
     .logo-aws span:first-child {
-      background: var(--aws-orange);
-      color: var(--aws-dark);
-      font-weight: 900;
-      font-size: 0.85rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
+      background: var(--aws-orange); color: var(--aws-dark);
+      font-weight: 900; font-size: .85rem;
+      padding: .3rem .6rem; border-radius: 4px;
     }
-    .logo-aws span:last-child {
-      color: var(--aws-orange);
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-
-    .divider-dot {
-      width: 6px; height: 6px;
-      background: var(--gft-steel);
-      border-radius: 50%;
-    }
-
+    .logo-aws span:last-child { color: var(--aws-orange); font-weight: 700; font-size: .85rem; }
+    .divider-dot { width: 6px; height: 6px; background: var(--gft-steel); border-radius: 50%; }
     header h1 {
       font-size: clamp(1.25rem, 3vw, 1.75rem);
-      font-weight: 800;
-      line-height: 1.2;
+      font-weight: 800; line-height: 1.2;
       position: relative; z-index: 1;
     }
     header h1 span { color: var(--aws-orange); }
-
     .header-meta {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 0.75rem;
-      flex-wrap: wrap;
-      position: relative; z-index: 1;
+      display: flex; gap: 1.5rem; margin-top: .75rem;
+      flex-wrap: wrap; position: relative; z-index: 1;
     }
     .meta-chip {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 20px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.78rem;
-      color: var(--gft-pale);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px; padding: .25rem .75rem;
+      font-size: .78rem; color: var(--gft-pale);
+      display: flex; align-items: center; gap: .4rem;
     }
-    .meta-chip .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--aws-orange);
-    }
+    .meta-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--aws-orange); }
 
-    /* ─── Legend ────────────────────────────────────────────────────── */
+    /* ── Legend ──────────────────────────────────────── */
     .legend {
       background: var(--white);
       border-bottom: 2px solid var(--gray-200);
-      padding: 0.75rem 2rem;
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      align-items: center;
+      padding: .75rem 2rem;
+      display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;
     }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--gray-700);
-    }
-    .legend-badge {
-      width: 12px; height: 12px;
-      border-radius: 3px;
-    }
+    .legend-item { display: flex; align-items: center; gap: .4rem; font-size: .78rem; font-weight: 500; }
+    .legend-badge { width: 12px; height: 12px; border-radius: 3px; }
 
-    /* ─── Main Layout ───────────────────────────────────────────────── */
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1.5rem 1.5rem 3rem;
-    }
+    /* ── Main ────────────────────────────────────────── */
+    main { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
 
-    /* ─── Section Titles ────────────────────────────────────────────── */
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin: 2rem 0 1rem;
-    }
-    .section-title::before {
-      content: '';
-      width: 4px;
-      height: 28px;
-      background: linear-gradient(to bottom, var(--aws-orange), var(--gft-steel));
-      border-radius: 2px;
-    }
-    .section-title h2 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--gft-navy);
-    }
-    .section-title .badge {
-      background: var(--gft-pale);
-      color: var(--gft-blue);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.15rem 0.5rem;
-      border-radius: 10px;
-    }
-
-    /* ─── Week Cards ────────────────────────────────────────────────── */
-    .week-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1rem;
-    }
-
-    .week-card {
-      background: var(--white);
-      border-radius: 10px;
-      border: 1px solid var(--gray-200);
-      overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .week-card:hover {
-      box-shadow: 0 4px 20px rgba(13,27,42,0.12);
-      transform: translateY(-2px);
-    }
-
-    .week-header {
-      padding: 0.75rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .week-header.done    { background: linear-gradient(90deg, #1a3550, #22477a); }
-    .week-header.pending { background: linear-gradient(90deg, var(--aws-dark), #3B6186); }
-    .week-header.new     { background: linear-gradient(90deg, #7C3200, #B34700); }
-    .week-header.exam    { background: linear-gradient(90deg, #7F1D1D, #991B1B); }
-
-    .week-label {
-      color: var(--white);
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      opacity: 0.85;
-    }
-    .week-dates {
-      color: var(--white);
-      font-size: 0.8rem;
-      font-weight: 700;
-      opacity: 0.95;
-    }
-    .week-status {
-      font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 10px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .week-status.done    { background: var(--done-bg);    color: #15803D; }
-    .week-status.pending { background: var(--pending-bg); color: #92400E; }
-    .week-status.new     { background: var(--new-bg);     color: #92400E; }
-    .week-status.exam    { background: var(--exam-bg);    color: #991B1B; }
-
-    .week-body { padding: 0.75rem 1rem; }
-
-    .week-section-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--gft-mid);
-      margin: 0.6rem 0 0.35rem;
-    }
-    .week-section-label:first-child { margin-top: 0; }
-
-    .item-list { list-style: none; }
-    .item-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      padding: 0.3rem 0;
-      font-size: 0.82rem;
-      border-bottom: 1px solid var(--gray-100);
-      line-height: 1.4;
-    }
-    .item-list li:last-child { border-bottom: none; }
-
-    .item-icon {
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-top: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 9px;
-    }
-    .item-icon.done    { background: var(--done);    color: white; }
-    .item-icon.lab     { background: var(--gft-steel); color: white; }
-    .item-icon.review  { background: var(--aws-orange); color: white; }
-    .item-icon.new     { background: #F97316; color: white; }
-    .item-icon.exam    { background: var(--exam); color: white; }
-
-    .tag {
-      font-size: 0.65rem;
-      padding: 0.1rem 0.4rem;
-      border-radius: 8px;
-      font-weight: 600;
-      white-space: nowrap;
-      flex-shrink: 0;
-      align-self: flex-start;
-      margin-top: 2px;
-    }
-    .tag.lab     { background: #EFF6FF; color: #1D4ED8; }
-    .tag.review  { background: var(--new-bg); color: #B45309; }
-    .tag.new-c03 { background: #FFF0F0; color: #B91C1C; border: 1px solid #FCA5A5; }
-
-    /* ─── Alert Card ────────────────────────────────────────────────── */
+    /* ── Alert ───────────────────────────────────────── */
     .alert-card {
       background: linear-gradient(135deg, #FFF7E6, #FFF0D6);
       border: 2px solid var(--aws-orange);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
+      border-radius: 10px; padding: 1rem 1.25rem;
       margin-bottom: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
+      display: flex; gap: 1rem; align-items: flex-start;
     }
-    .alert-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-    .alert-card h3 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #92400E;
-      margin-bottom: 0.3rem;
-    }
-    .alert-card p {
-      font-size: 0.82rem;
-      color: #78350F;
-      line-height: 1.5;
-    }
+    .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .alert-card h3 { font-size: .9rem; font-weight: 700; color: #92400E; margin-bottom: .3rem; }
+    .alert-card p { font-size: .82rem; color: #78350F; line-height: 1.5; }
     .alert-card strong { color: #B45309; }
 
-    /* ─── Progress Bar ──────────────────────────────────────────────── */
+    /* ── Progress ────────────────────────────────────── */
     .progress-section {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 10px;
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;
     }
-    .progress-section h3 {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--gft-navy);
-      margin-bottom: 0.75rem;
+    .progress-section h3 { font-size: .85rem; font-weight: 700; color: var(--gft-navy); margin-bottom: .75rem; }
+    .progress-bar-wrap { background: var(--gray-100); border-radius: 6px; height: 10px; overflow: hidden; margin-bottom: .5rem; }
+    .progress-bar-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--gft-mid), var(--aws-orange)); }
+    .progress-labels { display: flex; justify-content: space-between; font-size: .72rem; color: var(--gray-500); }
+
+    /* ── Section title ───────────────────────────────── */
+    .section-title { display: flex; align-items: center; gap: .75rem; margin: 2rem 0 1rem; }
+    .section-title::before {
+      content: ''; width: 4px; height: 28px;
+      background: linear-gradient(to bottom, var(--aws-orange), var(--gft-steel));
+      border-radius: 2px;
     }
-    .progress-bar-wrap {
-      background: var(--gray-100);
-      border-radius: 6px;
-      height: 10px;
-      overflow: hidden;
-      margin-bottom: 0.5rem;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      border-radius: 6px;
-      background: linear-gradient(90deg, var(--gft-mid), var(--aws-orange));
-      transition: width 0.5s ease;
-    }
-    .progress-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.72rem;
-      color: var(--gray-500);
+    .section-title h2 { font-size: 1.1rem; font-weight: 700; color: var(--gft-navy); }
+    .section-title .badge {
+      background: var(--gft-pale); color: var(--gft-blue);
+      font-size: .72rem; font-weight: 600;
+      padding: .15rem .5rem; border-radius: 10px;
     }
 
-    /* ─── Exam Day Card ─────────────────────────────────────────────── */
+    /* ── Week cards ──────────────────────────────────── */
+    .week-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+    .week-card {
+      background: var(--white); border-radius: 10px;
+      border: 1px solid var(--gray-200); overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .week-card:hover { box-shadow: 0 4px 20px rgba(13,27,42,.12); transform: translateY(-2px); }
+
+    .week-header { padding: .75rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+    .week-header.done    { background: linear-gradient(90deg, #1a3550, #22477a); }
+    .week-header.pending { background: linear-gradient(90deg, var(--aws-dark), #3B6186); }
+    .week-header.new     { background: linear-gradient(90deg, #7C3200, #B34700); }
+
+    .week-label { color: var(--white); font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; opacity: .85; }
+    .week-dates { color: var(--white); font-size: .8rem; font-weight: 700; opacity: .95; }
+    .week-status { font-size: .7rem; padding: .2rem .6rem; border-radius: 10px; font-weight: 700; flex-shrink: 0; }
+    .week-status.done    { background: var(--done-bg); color: #15803D; }
+    .week-status.pending { background: #FEF3C7; color: #92400E; }
+    .week-status.new     { background: #FFF7E6; color: #92400E; }
+
+    .week-body { padding: .75rem 1rem; }
+    .week-section-label {
+      font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: var(--gft-mid); margin: .6rem 0 .35rem;
+    }
+    .week-section-label:first-child { margin-top: 0; }
+
+    /* ── Item list ───────────────────────────────────── */
+    .item-list { list-style: none; }
+    .item-list li {
+      display: flex; align-items: flex-start; gap: .5rem;
+      padding: .3rem 0; font-size: .82rem;
+      border-bottom: 1px solid var(--gray-100); line-height: 1.4;
+    }
+    .item-list li:last-child { border-bottom: none; }
+
+    /* icon */
+    .item-icon {
+      width: 16px; height: 16px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px;
+    }
+    .item-icon.done   { background: var(--done);      color: white; }
+    .item-icon.lab    { background: var(--gft-steel);  color: white; }
+    .item-icon.review { background: var(--aws-orange); color: white; }
+    .item-icon.new    { background: #F97316;           color: white; }
+
+    /* link wrapper inside li */
+    .item-link {
+      color: inherit; text-decoration: none;
+      flex: 1; display: flex; align-items: flex-start;
+      gap: .4rem; flex-wrap: wrap;
+    }
+    .item-link:hover { color: var(--gft-mid); text-decoration: underline; }
+
+    /* tags */
+    .tag {
+      font-size: .65rem; padding: .1rem .4rem;
+      border-radius: 8px; font-weight: 600;
+      white-space: nowrap; flex-shrink: 0;
+      align-self: flex-start; margin-top: 2px;
+    }
+    .tag.lab     { background: #EFF6FF; color: #1D4ED8; }
+    .tag.review  { background: #FFF7E6; color: #B45309; }
+    .tag.new-c03 { background: #FFF0F0; color: #B91C1C; border: 1px solid #FCA5A5; }
+    .tag.doc     { background: #F0FDF4; color: #15803D; }
+    .tag.free    { background: #F0FDF4; color: #166534; border: 1px solid #86EFAC; }
+
+    /* ── Exam card ───────────────────────────────────── */
     .exam-card {
       background: linear-gradient(135deg, var(--gft-navy), var(--aws-dark));
-      border-radius: 12px;
-      padding: 1.5rem;
-      color: var(--white);
-      text-align: center;
-      margin-top: 1.5rem;
-      position: relative;
-      overflow: hidden;
+      border-radius: 12px; padding: 1.5rem;
+      color: var(--white); text-align: center;
+      margin-top: 1.5rem; position: relative; overflow: hidden;
     }
     .exam-card::before {
-      content: '';
-      position: absolute;
-      top: -30px; right: -30px;
+      content: ''; position: absolute; top: -30px; right: -30px;
       width: 150px; height: 150px;
-      background: radial-gradient(circle, rgba(255,153,0,0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255,153,0,.25) 0%, transparent 70%);
       border-radius: 50%;
     }
-    .exam-card h2 {
-      font-size: 1.4rem;
-      font-weight: 900;
-      margin-bottom: 0.3rem;
-      position: relative; z-index: 1;
-    }
+    .exam-card h2 { font-size: 1.4rem; font-weight: 900; margin-bottom: .3rem; position: relative; z-index: 1; }
     .exam-card h2 span { color: var(--aws-orange); }
-    .exam-card p {
-      font-size: 0.85rem;
-      opacity: 0.8;
-      margin-bottom: 0.75rem;
-      position: relative; z-index: 1;
-    }
-    .exam-chips {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      position: relative; z-index: 1;
-    }
-    .exam-chip {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 20px;
-      padding: 0.3rem 0.9rem;
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-    .exam-chip.highlight {
-      background: var(--aws-orange);
-      color: var(--aws-dark);
-      border-color: var(--aws-orange);
-      font-weight: 800;
-    }
+    .exam-card p { font-size: .85rem; opacity: .8; margin-bottom: .75rem; position: relative; z-index: 1; }
+    .exam-chips { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; position: relative; z-index: 1; }
+    .exam-chip { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25); border-radius: 20px; padding: .3rem .9rem; font-size: .78rem; font-weight: 600; }
+    .exam-chip.highlight { background: var(--aws-orange); color: var(--aws-dark); border-color: var(--aws-orange); font-weight: 800; }
 
-    /* ─── Footer ────────────────────────────────────────────────────── */
-    footer {
-      background: var(--gft-navy);
-      color: rgba(255,255,255,0.5);
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.75rem;
-    }
+    /* ── Footer ──────────────────────────────────────── */
+    footer { background: var(--gft-navy); color: rgba(255,255,255,.5); text-align: center; padding: 1rem; font-size: .75rem; }
     footer span { color: var(--aws-orange); font-weight: 600; }
 
-    /* ─── Responsive ────────────────────────────────────────────────── */
     @media (max-width: 600px) {
       header { padding: 1.25rem 1rem 1rem; }
-      main { padding: 1rem 0.75rem 2rem; }
-      .legend { padding: 0.75rem 1rem; }
+      main   { padding: 1rem .75rem 2rem; }
+      .legend { padding: .75rem 1rem; }
       .week-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- ─── Header ─────────────────────────────────────────── -->
+<!-- Header -->
 <header>
   <div class="header-top">
     <div class="logo-gft">GFT</div>
     <div class="divider-dot"></div>
-    <div class="logo-aws">
-      <span>AWS</span>
-      <span>Certified</span>
-    </div>
+    <div class="logo-aws"><span>AWS</span><span>Certified</span></div>
   </div>
   <h1>Cronograma de Estudos<br><span>AWS Solutions Architect – Professional</span></h1>
   <div class="header-meta">
@@ -473,17 +253,16 @@
   </div>
 </header>
 
-<!-- ─── Legend ──────────────────────────────────────────── -->
+<!-- Legend -->
 <div class="legend">
-  <span style="font-size:0.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.06em">Legenda:</span>
-  <div class="legend-item"><div class="legend-badge" style="background:var(--gft-mid)"></div> Módulo</div>
-  <div class="legend-item"><div class="legend-badge" style="background:var(--gft-steel)"></div> Lab</div>
-  <div class="legend-item"><div class="legend-badge" style="background:var(--aws-orange)"></div> Review / Prática</div>
-  <div class="legend-item"><div class="legend-badge" style="background:#F97316"></div> Novo no SAP-C03</div>
-  <div class="legend-item"><div class="legend-badge" style="background:var(--done)"></div> Concluído</div>
+  <span style="font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.06em">Legenda:</span>
+  <div class="legend-item"><div class="legend-badge" style="background:var(--gft-mid)"></div>Módulo</div>
+  <div class="legend-item"><div class="legend-badge" style="background:var(--gft-steel)"></div>Lab</div>
+  <div class="legend-item"><div class="legend-badge" style="background:var(--aws-orange)"></div>Review / Prática</div>
+  <div class="legend-item"><div class="legend-badge" style="background:#F97316"></div>Novo SAP-C03</div>
+  <div class="legend-item"><div class="legend-badge" style="background:var(--done)"></div>Concluído</div>
 </div>
 
-<!-- ─── Main ────────────────────────────────────────────── -->
 <main>
 
   <!-- Alert -->
@@ -491,8 +270,8 @@
     <div class="alert-icon">⚠️</div>
     <div>
       <h3>Atenção: sua prova é SAP-C03</h3>
-      <p>O SAP-C02 encerra em <strong>16/11/2026</strong>. Sua prova (05/12) cai automaticamente no <strong>SAP-C03</strong>.
-      Quando o registro abrir em <strong>27/10/2026</strong>, confirme o agendamento na nova versão.
+      <p>O SAP-C02 encerra em <strong>16/11/2026</strong>. Sua prova (05/12) cai no <strong>SAP-C03</strong>.
+      Quando o registro abrir em <strong>27/10/2026</strong>, confirme o agendamento.
       As semanas 13–15 cobrem as novidades exclusivas do C03.</p>
     </div>
   </div>
@@ -500,9 +279,7 @@
   <!-- Progress -->
   <div class="progress-section">
     <h3>Progresso Geral — 15 semanas até a prova</h3>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" style="width: 80%"></div>
-    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:80%"></div></div>
     <div class="progress-labels">
       <span>Semanas 1–12: base SAP-C02 ✓</span>
       <span>Semanas 13–15: complemento SAP-C03</span>
@@ -510,7 +287,7 @@
     </div>
   </div>
 
-  <!-- ── Bloco 1: Concluído ─────────────────────────── -->
+  <!-- ══ BLOCO 1 — Digital Classroom ══════════════════ -->
   <div class="section-title">
     <h2>Base do Curso — Digital Classroom</h2>
     <span class="badge">Semanas 1–6 · Concluídas</span>
@@ -527,10 +304,30 @@
       <div class="week-body">
         <p class="week-section-label">Digital Classroom</p>
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>Module 1: Review Architecting Concepts</li>
-          <li><div class="item-icon done">✓</div>Module 2: Single to Multiple Accounts</li>
-          <li><div class="item-icon done">✓</div>Module 3: Hybrid Connectivity</li>
-          <li><div class="item-icon lab">L</div>Lab 1 (Opt.): Securing Amazon S3 VPC Endpoint <span class="tag lab">Lab</span></li>
+          <li>
+            <div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">
+              Module 1: Review Architecting Concepts
+            </a>
+          </li>
+          <li>
+            <div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">
+              Module 2: Single to Multiple Accounts
+            </a>
+          </li>
+          <li>
+            <div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">
+              Module 3: Hybrid Connectivity
+            </a>
+          </li>
+          <li>
+            <div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">
+              Lab 1 (Opt.): Securing Amazon S3 VPC Endpoint <span class="tag lab">Lab</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -543,10 +340,18 @@
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>Module 4: Specialized Infrastructure</li>
-          <li><div class="item-icon done">✓</div>Module 5: Connecting Networks</li>
-          <li><div class="item-icon done">✓</div>Module 6: Containers</li>
-          <li><div class="item-icon lab">L</div>Lab 2: Configuring AWS Transit Gateway <span class="tag lab">Lab</span></li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 4: Specialized Infrastructure</a>
+          </li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 5: Connecting Networks</a>
+          </li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 6: Containers</a>
+          </li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 2: Configuring AWS Transit Gateway <span class="tag lab">Lab</span></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -559,9 +364,15 @@
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon lab">L</div>Lab 3: Deploying App with ECS on Fargate <span class="tag lab">Lab</span></li>
-          <li><div class="item-icon done">✓</div>Module 7: CI/CD</li>
-          <li><div class="item-icon done">✓</div>Module 8: High Availability and DDoS</li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 3: Deploying App with ECS on Fargate <span class="tag lab">Lab</span></a>
+          </li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 7: CI/CD</a>
+          </li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 8: High Availability and DDoS</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -574,9 +385,15 @@
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>Module 9: Securing Data</li>
-          <li><div class="item-icon done">✓</div>Module 10: Large-Scale Data Stores</li>
-          <li><div class="item-icon lab">L</div>Lab 4: Setting Up a Data Lake with Lake Formation <span class="tag lab">Lab</span></li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 9: Securing Data</a>
+          </li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 10: Large-Scale Data Stores</a>
+          </li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 4: Setting Up a Data Lake with Lake Formation <span class="tag lab">Lab</span></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -589,9 +406,15 @@
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>Module 11: Migrating Workloads</li>
-          <li><div class="item-icon done">✓</div>Module 12: Optimizing Cost</li>
-          <li><div class="item-icon lab">L</div>Lab 5: Migrating NFS with DataSync & Storage GW <span class="tag lab">Lab</span></li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 11: Migrating Workloads</a>
+          </li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 12: Optimizing Cost</a>
+          </li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab 5: Migrating NFS with DataSync & Storage Gateway <span class="tag lab">Lab</span></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -604,15 +427,19 @@
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon done">✓</div>Module 13: Architecting for the Edge</li>
-          <li><div class="item-icon done">✓</div>Post-Assessment</li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Module 13: Architecting for the Edge</a>
+          </li>
+          <li><div class="item-icon done">✓</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Post-Assessment</a>
+          </li>
         </ul>
       </div>
     </div>
 
-  </div>
+  </div><!-- /week-grid -->
 
-  <!-- ── Bloco 2: Labs Adicionais ───────────────────── -->
+  <!-- ══ BLOCO 2 — Labs Adicionais ═════════════════════ -->
   <div class="section-title">
     <h2>Labs Adicionais</h2>
     <span class="badge">Semanas 7–10 · Concluídas</span>
@@ -628,8 +455,12 @@
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon lab">L</div>Lab: Creating Amazon VPC with CloudFormation <span class="tag lab">Lab</span></li>
-          <li><div class="item-icon lab">L</div>Lab: Building VPC, S3, EC2, RDS with Service Catalog <span class="tag lab">Lab</span></li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Creating Amazon VPC with CloudFormation <span class="tag lab">Lab</span></a>
+          </li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Building VPC, S3, EC2, RDS with Service Catalog <span class="tag lab">Lab</span></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -642,9 +473,15 @@
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon lab">L</div>Lab: VPC Logging and Troubleshooting <span class="tag lab">Lab</span></li>
-          <li><div class="item-icon lab">L</div>Lab: VPC Peering vs Transit Gateway <span class="tag lab">Lab</span></li>
-          <li><div class="item-icon lab">L</div>Lab: Configuring High Availability for Your App <span class="tag lab">Lab</span></li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: VPC Logging and Troubleshooting <span class="tag lab">Lab</span></a>
+          </li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: VPC Peering vs Transit Gateway <span class="tag lab">Lab</span></a>
+          </li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Configuring High Availability <span class="tag lab">Lab</span></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -657,16 +494,22 @@
       </div>
       <div class="week-body">
         <ul class="item-list">
-          <li><div class="item-icon lab">L</div>Lab: Creating and Automating Backups with AWS Backup <span class="tag lab">Lab</span></li>
-          <li><div class="item-icon lab">L</div>Lab: Migrate On-Premises DB with AWS DMS <span class="tag lab">Lab</span></li>
-          <li><div class="item-icon lab">L</div>Lab: Migrating On-Premises NFS with DataSync & Storage GW <span class="tag lab">Lab</span></li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Automating Backups with AWS Backup <span class="tag lab">Lab</span></a>
+          </li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Migrate On-Premises DB with AWS DMS <span class="tag lab">Lab</span></a>
+          </li>
+          <li><div class="item-icon lab">L</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/9FMM78VBAW/digital-classroom--advanced-architecting-on-aws/T4JGMPKS9X" target="_blank" rel="noopener">Lab: Migrating NFS with DataSync & Storage Gateway <span class="tag lab">Lab</span></a>
+          </li>
         </ul>
       </div>
     </div>
 
   </div>
 
-  <!-- ── Bloco 3: Domain Review ──────────────────────── -->
+  <!-- ══ BLOCO 3 — Domain Review ════════════════════════ -->
   <div class="section-title">
     <h2>Domain Review — SAP-C02</h2>
     <span class="badge">Semanas 11–12 · Em andamento</span>
@@ -683,10 +526,26 @@
       <div class="week-body">
         <p class="week-section-label">Domain 1 & 2</p>
         <ul class="item-list">
-          <li><div class="item-icon review">R</div>Domain 1 Review <span class="tag review">Review</span></li>
-          <li><div class="item-icon review">R</div>Domain 1 Practice</li>
-          <li><div class="item-icon review">R</div>Domain 2 Review <span class="tag review">Review</span></li>
-          <li><div class="item-icon review">R</div>Domain 2 Practice</li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/NYGJW6MGA8/domain-1-review-aws-certified-solutions-architect--professional-sapc02--english/T1N6FVN74Q" target="_blank" rel="noopener">
+              Domain 1 Review <span class="tag review">Review</span>
+            </a>
+          </li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/NYGJW6MGA8/domain-1-review-aws-certified-solutions-architect--professional-sapc02--english/T1N6FVN74Q" target="_blank" rel="noopener">
+              Domain 1 Practice
+            </a>
+          </li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/2S2E5KT1XU/domain-2-review-aws-certified-solutions-architect--professional-sapc02--english/Y7H2637GTS" target="_blank" rel="noopener">
+              Domain 2 Review <span class="tag review">Review</span>
+            </a>
+          </li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/2S2E5KT1XU/domain-2-review-aws-certified-solutions-architect--professional-sapc02--english/Y7H2637GTS" target="_blank" rel="noopener">
+              Domain 2 Practice
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -700,17 +559,33 @@
       <div class="week-body">
         <p class="week-section-label">Domain 3 & 4</p>
         <ul class="item-list">
-          <li><div class="item-icon review">R</div>Domain 3 Review <span class="tag review">Review</span></li>
-          <li><div class="item-icon review">R</div>Domain 3 Practice</li>
-          <li><div class="item-icon review">R</div>Domain 4 Review <span class="tag review">Review</span></li>
-          <li><div class="item-icon review">R</div>Domain 4 Practice</li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/GE9DGKYPF6/domain-3-review-aws-certified-solutions-architect--professional-sapc02--english/RKVCYQN75Y" target="_blank" rel="noopener">
+              Domain 3 Review <span class="tag review">Review</span>
+            </a>
+          </li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/GE9DGKYPF6/domain-3-review-aws-certified-solutions-architect--professional-sapc02--english/RKVCYQN75Y" target="_blank" rel="noopener">
+              Domain 3 Practice
+            </a>
+          </li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/BR1SGAWFJY/domain-4-review-aws-certified-solutions-architect--professional-sapc02--english/F4H2F4G6YU" target="_blank" rel="noopener">
+              Domain 4 Review <span class="tag review">Review</span>
+            </a>
+          </li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://skillbuilder.aws/learn/BR1SGAWFJY/domain-4-review-aws-certified-solutions-architect--professional-sapc02--english/F4H2F4G6YU" target="_blank" rel="noopener">
+              Domain 4 Practice
+            </a>
+          </li>
         </ul>
       </div>
     </div>
 
   </div>
 
-  <!-- ── Bloco 4: Complemento SAP-C03 ───────────────── -->
+  <!-- ══ BLOCO 4 — Complemento SAP-C03 ═════════════════ -->
   <div class="section-title">
     <h2>Complemento SAP-C03 — Novos Tópicos</h2>
     <span class="badge" style="background:#FFF0F0;color:#B91C1C;border:1px solid #FCA5A5">Semanas 13–15 · NOVO</span>
@@ -727,11 +602,36 @@
       <div class="week-body">
         <p class="week-section-label">Generative AI & Agentic AI — 11 novas habilidades</p>
         <ul class="item-list">
-          <li><div class="item-icon new">★</div>Amazon Bedrock: fundamentos, modelos, Knowledge Bases <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>Amazon Bedrock AgentCore (agentes autônomos) <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>RAG Architecture (Retrieval-Augmented Generation) <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>Bedrock Guardrails — content filtering <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>Human-in-the-loop com Amazon A2I <span class="tag new-c03">C03</span></li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/17556/amazon-bedrock-getting-started" target="_blank" rel="noopener">
+              Amazon Bedrock Getting Started <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/17929/building-generative-ai-applications-using-amazon-bedrock" target="_blank" rel="noopener">
+              Building Generative AI Apps with Amazon Bedrock <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://aws.amazon.com/bedrock/agents/" target="_blank" rel="noopener">
+              Amazon Bedrock AgentCore — Agentes Autônomos <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/18494/foundations-of-prompt-engineering" target="_blank" rel="noopener">
+              RAG Architecture + Prompt Engineering <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener">
+              Bedrock Guardrails — Content Filtering <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-use-augmented-ai-a2i-human-review-loops.html" target="_blank" rel="noopener">
+              Human-in-the-loop com Amazon A2I <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -745,12 +645,36 @@
       <div class="week-body">
         <p class="week-section-label">Resiliência + Cloud-Native + DevSecOps</p>
         <ul class="item-list">
-          <li><div class="item-icon new">★</div>AWS Fault Injection Service (chaos engineering) <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>AWS Resilience Hub + Application Recovery Controller <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>Amazon VPC Lattice — service mesh <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>ECS Service Connect <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>Multi-tenant architecture patterns <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>Pipeline security scanning + synthetic monitoring <span class="tag new-c03">C03</span></li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/1877/aws-fault-injection-service-getting-started" target="_blank" rel="noopener">
+              AWS Fault Injection Service — Getting Started <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/18528/resilience-on-aws-architecting-for-reliability" target="_blank" rel="noopener">
+              Resilience on AWS — Architecting for Reliability <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://aws.amazon.com/resilience-hub/" target="_blank" rel="noopener">
+              AWS Resilience Hub + App Recovery Controller <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/what-is-vpc-lattice.html" target="_blank" rel="noopener">
+              Amazon VPC Lattice — Service Mesh <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html" target="_blank" rel="noopener">
+              ECS Service Connect <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/15760/devsecops-on-aws" target="_blank" rel="noopener">
+              DevSecOps on AWS — Pipeline Security Scanning <span class="tag new-c03">C03</span><span class="tag free">Gratuito</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -764,18 +688,36 @@
       <div class="week-body">
         <p class="week-section-label">Data & Analytics + Criptografia + Simulados</p>
         <ul class="item-list">
-          <li><div class="item-icon new">★</div>Apache Iceberg + Lake Formation (lakehouse) <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>AWS Clean Rooms (cross-account data sharing) <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon new">★</div>Post-Quantum Cryptography: ML-DSA e ML-KEM no KMS <span class="tag new-c03">C03</span></li>
-          <li><div class="item-icon review">R</div>Simulado 1 completo (75 questões · 180 min)</li>
-          <li><div class="item-icon review">R</div>Revisão das questões erradas</li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://docs.aws.amazon.com/lake-formation/latest/dg/apache-iceberg.html" target="_blank" rel="noopener">
+              Apache Iceberg + Lake Formation (Lakehouse) <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://aws.amazon.com/clean-rooms/" target="_blank" rel="noopener">
+              AWS Clean Rooms — Cross-Account Data Sharing <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
+          <li><div class="item-icon new">★</div>
+            <a class="item-link" href="https://docs.aws.amazon.com/kms/latest/developerguide/pqtls.html" target="_blank" rel="noopener">
+              Post-Quantum Cryptography: ML-DSA e ML-KEM no KMS <span class="tag new-c03">C03</span><span class="tag doc">Doc</span>
+            </a>
+          </li>
+          <li><div class="item-icon review">R</div>
+            <a class="item-link" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/13614/exam-prep-aws-certified-solutions-architect-professional-sap-c02" target="_blank" rel="noopener">
+              Exam Prep Official — Simulado Completo (75q · 180min) <span class="tag review">Simulado</span>
+            </a>
+          </li>
+          <li><div class="item-icon review">R</div>
+            <span class="item-link">Revisão das questões erradas</span>
+          </li>
         </ul>
       </div>
     </div>
 
   </div>
 
-  <!-- ── Exam Day ────────────────────────────────────── -->
+  <!-- Exam Day -->
   <div class="exam-card">
     <h2>🎯 Dia da Prova — <span>05 de dezembro de 2026</span></h2>
     <p>AWS Certified Solutions Architect – Professional</p>
@@ -790,7 +732,6 @@
 
 </main>
 
-<!-- ─── Footer ──────────────────────────────────────────── -->
 <footer>
   Preparação AWS SAP-C03 · <span>GFT Technologies</span> · Prova: 05 dez 2026
 </footer>
